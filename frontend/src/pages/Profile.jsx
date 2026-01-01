@@ -32,7 +32,7 @@ const Profile = () => {
                         {/* Avatar */}
                         <div className="shrink-0">
                             <img
-                                src={import.meta.env.VITE_PROFILE_IMAGE}
+                                src="https://files.catbox.moe/74owl8.png"
                                 alt="profile"
                                 className="w-36 h-36 rounded-full object-cover"
                             />
