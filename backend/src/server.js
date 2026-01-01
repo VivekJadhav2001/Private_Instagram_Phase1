@@ -9,11 +9,10 @@ import userRoutes from "./routes/user.routes.js"
 
 
 dotenv.config()
-const corsOrigins = ["http://localhost:5173","http://localhost:5174"]
 const app = express()
 const PORT = process.env.PORT
 app.use(cors({
-   origin: corsOrigins,
+   origin: process.env.FRONTEND_URL, 
     methods: ["GET","HEAD","POST","PUT","PATCH","DELETE","OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials:true           

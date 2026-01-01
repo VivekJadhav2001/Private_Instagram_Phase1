@@ -67,8 +67,8 @@ const signIn = async (req, res) => {
 
         return res.cookie("private-instagram-token", token, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax"
+            secure: true,
+            sameSite: "none"
         }).status(200).json({ success: true, message: "Login successful", data: loginUser })
 
     } catch (error) {
@@ -93,8 +93,8 @@ const logout = async (req, res) => {
     try {
         res.clearCookie("private-instagram-token", {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: true,
+            sameSite: "none",
         });
 
         return res.status(200).json({
