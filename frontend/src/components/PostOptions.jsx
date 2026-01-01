@@ -27,7 +27,7 @@ function PostOptions({ post, currentUserId, onClose, setOpen, isDark=true }) {
         </>
       )}
 
-      <Option text="🗑️ Delete Post" danger onClick={handleDelete} />
+      {isOwner && (<Option text="🗑️ Delete Post" danger onClick={handleDelete} />)}
     </div>
   );
 }

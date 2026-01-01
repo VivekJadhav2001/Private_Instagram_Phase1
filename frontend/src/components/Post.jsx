@@ -30,6 +30,8 @@ const Post = ({ post }) => {
   const { user } = useSelector((state) => state.auth);
   const currentUserId = user?._id;
 
+  const isOwner = post.user?._id === currentUserId;
+
 
 
   const [liked, setLiked] = useState(
@@ -98,13 +100,13 @@ const Post = ({ post }) => {
         </div>
 
         {/* MENU */}
-        <div className="relative">
+        {isOwner && (<div className="relative">
           <button onClick={handleMenuClick} className="font-bold cursor-pointer">
             {menuLoading ? "⏳" : "⋮"}
           </button>
 
           {menuOpen && <PostOptions currentUserId={currentUserId} post={post} setOpen={setShowEdit} onClose={() => setMenuOpen(false)} />}
-        </div>
+        </div>)}
       </div>
 
       {/* Image */}
