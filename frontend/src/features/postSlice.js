@@ -13,7 +13,7 @@ export const getAllPosts = createAsyncThunk("user/allposts",
     async (_, { rejectWithValue }) => {
         try {
             const res = await api.get("/post/getAllPosts")
-            console.log("Data from backend:", res.data.posts);
+            // console.log("Data from backend:", res.data.posts);
             return res.data.posts //all posts
         } catch (error) {
             console.log("Error in thunk:", error);

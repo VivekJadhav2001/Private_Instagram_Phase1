@@ -37,7 +37,7 @@ const Sidebar = () => {
     return (
         <aside className="hidden md:flex flex-col w-64 h-screen fixed left-0 top-0 border-r border-gray-700 bg-black text-white px-4 py-6">
 
-            <h1 className="text-2xl font-semibold mb-10">Instagram</h1>
+            <h1 className="text-2xl font-semibold mb-10">Private Instagram</h1>
 
             <nav className="flex flex-col justify-between h-full text-lg">
                 <div className="flex flex-col justify-center items-start gap-6">

@@ -119,7 +119,7 @@ const likePost = async (req, res) => {
     const postId = req.params.postId;
     const userId = req.user.id; // JWT should have id
 
-    console.log("post id", postId, "user Id", userId)
+    // console.log("post id", postId, "user Id", userId)
 
     const post = await Post.findById(postId);
     if (!post) return res.status(404).json({ success: false, message: "Post Not Found" });
@@ -216,8 +216,8 @@ const updatePost = async (req, res) => {
       return res.status(404).json({ success: false, message: "Post Not Found" })
     }
 
-    console.log(post.user.toString(), "Post user")
-    console.log(req.user.id, "middleware")
+    // console.log(post.user.toString(), "Post user")
+    // console.log(req.user.id, "middleware")
     //Check if user is valid or not
     if (post.user._id.toString() !== req.user.id) {
       return res.status(401).json({ success: false, message: "User not authorized to update this post" })

@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Likes({ isDark = true, likes = [], setShowLikes }) {
-    console.log(likes)
+    // console.log(likes)
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
             {/* Backdrop */}

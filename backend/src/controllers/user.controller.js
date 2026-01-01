@@ -49,7 +49,7 @@ const signIn = async (req, res) => {
         }
 
         const user = await User.findOne({ email })
-        console.log(user)
+        // console.log(user)
         if (!user) {
             return res.status(404).json({ success: false, message: "User Not Found" })
         }

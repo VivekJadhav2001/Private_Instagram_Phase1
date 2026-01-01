@@ -1,10 +1,18 @@
 import { useSelector, useDispatch } from "react-redux";
+import { deletePost } from "../features/postSlice";
 
 function PostOptions({ post, currentUserId, onClose, setOpen, isDark=true }) {
   const isOwner = post.user?._id === currentUserId;
 
+  const dispatch = useDispatch();
+
   const handleEdit = () => {
     setOpen(true);
+    onClose();
+  };
+
+  const handleDelete = () => {
+    dispatch(deletePost(post._id));
     onClose();
   };
 
@@ -19,7 +27,7 @@ function PostOptions({ post, currentUserId, onClose, setOpen, isDark=true }) {
         </>
       )}
 
-      <Option text="🗑️ Delete Post" danger onClick={() => deletePost(post._id)} />
+      <Option text="🗑️ Delete Post" danger onClick={handleDelete} />
     </div>
   );
 }

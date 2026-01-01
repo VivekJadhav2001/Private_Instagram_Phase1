@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const TopProfileBar = () => {
   const user = useSelector(state => state.auth.user);
-  console.log(user,"user in top profile")
+  // console.log(user,"user in top profile")
 
   const firstName = user.name.split(" ")[0]
   const firstLetter = firstName[0]
