@@ -31,12 +31,19 @@ const postCreate = async (req, res) => {
   try {
     const { text, image } = req.body
 
-    const post = await Post.create({
+    // console.log(req.user,"MIddleware")
+
+    let post = await Post.create({
       text,
       image,
-      user: req.user.id, // ✅ correct
+      user: req.user.id, 
+      email:req.user.email,
+      name:req.user.name
     })
 
+    post = await post.populate("user","_id name email")
+
+    // console.log(post,"POST IN BACKEND CREATE")
     res.status(201).json({
       success: true,
       post,
@@ -54,6 +61,7 @@ const allPosts = async (req, res) => {
       
       .sort({ createdAt: -1 })
 
+      // console.log(posts,"backend get all posts")
     res.status(200).json({
       success: true,
       posts,

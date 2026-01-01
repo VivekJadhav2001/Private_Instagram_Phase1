@@ -20,8 +20,8 @@ export const loginUser = createAsyncThunk(
     async (data, { rejectWithValue }) => {
         try {
             const res = await api.post("/auth/signIn", data);
-            console.log(res,"User Data in auth slice")
-            return res.data.data; 
+            // console.log(res, "User Data in auth slice")
+            return res.data.data;
         } catch (err) {
             return rejectWithValue(err.response?.data?.message);
         }
@@ -40,6 +40,8 @@ export const fetchMe = createAsyncThunk(
         }
     }
 );
+
+
 
 const authSlice = createSlice({
     name: "auth",
@@ -64,10 +66,10 @@ const authSlice = createSlice({
         builder
             /* LOGIN */
             .addCase(loginUser.fulfilled, (state, action) => {
-  state.user = action.payload;
-  state.isAuthenticated = true;
-  state.loading = false;
-})
+                state.user = action.payload;
+                state.isAuthenticated = true;
+                state.loading = false;
+            })
 
             /* SIGNUP */
             .addCase(signUpUser.fulfilled, (state) => {
@@ -78,11 +80,15 @@ const authSlice = createSlice({
             .addCase(fetchMe.fulfilled, (state, action) => {
                 state.user = action.payload;
                 state.isAuthenticated = true;
-                state.authChecked = true;  
+                state.authChecked = true;
                 state.loading = false;
             })
 
+
+
             .addCase(fetchMe.rejected, (state) => {
+                state.user = null;
+                state.isAuthenticated = false;
                 state.authChecked = true;
                 state.loading = false;
             })
@@ -96,15 +102,15 @@ const authSlice = createSlice({
                     state.error = null;
                 }
             )
-            .addMatcher(
-                (action) => action.type.endsWith("/rejected"),
-                (state, action) => {
-                    state.loading = false;
-                    state.error = action.payload;
-                }
-            );
-    },
-});
+        .addMatcher(
+            (action) => action.type.endsWith("/rejected"),
+            (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            }
+        )
+},
+})
 
 export const { logout } = authSlice.actions;
 export const { resetAuthState } = authSlice.actions;

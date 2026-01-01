@@ -7,6 +7,9 @@ import { useDispatch } from "react-redux";
 import { fetchMe } from "./features/authSlice";
 import Home from "./pages/Home";
 import AuthRoute from "./contexts/AuthRoute.jsx"
+import Profile from "./pages/Profile.jsx";
+
+
 function App() {
   const dispatch = useDispatch();
 
@@ -42,6 +45,15 @@ function App() {
             <Home />
           </ProtectedRoute>
         }
+      />
+
+      <Route
+      path="/profile"
+      element={
+        <ProtectedRoute>
+          <Profile/>
+        </ProtectedRoute>
+      }
       />
     </Routes>
   );

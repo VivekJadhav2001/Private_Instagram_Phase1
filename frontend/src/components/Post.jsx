@@ -65,6 +65,8 @@ const Post = ({ post }) => {
     }
   };
 
+  // console.log(post , "post in  frontend")
+
   
 
   return (
@@ -73,9 +75,9 @@ const Post = ({ post }) => {
       <div className="flex items-center justify-between p-3">
         <div className="flex justify-center items-center gap-3">
           <div className="w-10 h-10 flex justify-center items-center bg-slate-900 rounded-full text-white font-semibold text-2xl">
-            {post.user?.name?.[0] || "U"}
+            {post.user?.name?.[0]}
           </div>
-          <span className="font-semibold text-base">{post.user?.name || "Unknown"}</span>
+          <span className="font-semibold text-base">{post.user?.name}</span>
         </div>
 
         {/* MENU */}
@@ -127,7 +129,7 @@ const Post = ({ post }) => {
 
       {/* Caption */}
       <div className="px-3 text-sm">
-        <span className="font-semibold">{post.user?.name || "Unknown"}</span> {post.text}
+        <span className="font-semibold">{post.user?.name}</span> {post.text}
       </div>
 
       {/* Comment Input */}

@@ -51,7 +51,9 @@ export const createPost = createAsyncThunk(
                 image: imageUrl,
             });
 
-            return res.data.post; // 👈 IMPORTANT (new post object)
+            // console.log(res,"RES IN FRONTEND OF CREATING THUNK")
+
+            return res.data.post; 
         } catch (error) {
             return rejectWithValue(error.response?.data?.message);
         }

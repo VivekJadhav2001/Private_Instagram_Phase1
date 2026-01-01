@@ -10,18 +10,17 @@ const Home = () => {
   const dispatch = useDispatch();
 
 
-const { list: posts, loading, creating } = useSelector(
-  state => state.posts
-);
+  const { list: posts, loading, creating } = useSelector(
+    state => state.posts
+  );
 
-  const state = useSelector((state)=>state)
+  // console.log(posts, "POsts in Home Page")
 
-  console.log(state)
 
-  // console.log(posts,"posts in home")
+  
   useEffect(() => {
     dispatch(getAllPosts());
-  }, [dispatch])
+  }, [])
 
   return (
     <div className="bg-black min-h-screen text-white">

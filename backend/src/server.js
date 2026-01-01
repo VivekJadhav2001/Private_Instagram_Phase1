@@ -28,6 +28,31 @@ app.use("/api/auth",authRoutes)
 app.use("/api/user",userRoutes)
 app.use("/api/post",postRoutes)
 
+app.get("/", (req, res) => {
+  res.send(`
+    <html>
+      <head>
+        <style>
+          body {
+            padding-top: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          h1 {
+            color: black;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>Private Instagram</h1>
+      </body>
+    </html>
+  `);
+});
+
+console.log("Narendra & Vivek")
+
 app.listen(PORT,()=>{
     console.log(`Server is running on PORT: ${PORT}`)
 })

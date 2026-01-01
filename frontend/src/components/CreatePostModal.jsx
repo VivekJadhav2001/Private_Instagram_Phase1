@@ -10,6 +10,7 @@ export default function CreatePostModal({ open, onClose }) {
   const [text, setText] = useState("");
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [pic,setPic] = useState(null)
 
   const dispatch = useDispatch();
 
@@ -66,9 +67,15 @@ const handleCreatePost = () => {
             </p>
             <input type="file"
               accept="image/*"
-              onChange={(e) => setFile(e.target.files[0])}
+              // onChange={(e) => setFile(e.target.files[0])}
+              onChange={(e)=>{
+                const image = e.target.files[0]
+                setFile(image)
+                setPic(URL.createObjectURL(image))
+              }}
               className="mt-3 text-center bg-blue-600 hover:bg-blue-700 px-4 py-1.5 rounded-md text-sm"
             />
+            {pic && <img src={pic} alt="Picture" />}
           </div>
         </div>
 
