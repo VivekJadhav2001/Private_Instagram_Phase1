@@ -53,12 +53,53 @@ export const createPost = createAsyncThunk(
 
             // console.log(res,"RES IN FRONTEND OF CREATING THUNK")
 
-            return res.data.post; 
+            return res.data.post;
         } catch (error) {
             return rejectWithValue(error.response?.data?.message);
         }
     }
 );
+
+export const getMyPosts = createAsyncThunk("user/getMyPost",
+    async (userId, { rejectWithValue }) => {
+        try {
+            const res = await api.get("/post/getMyPosts")
+            return res.data.data
+        } catch (error) {
+            console.log(error, "Error in Get My Posts thunnk")
+            return rejectWithValue(error)
+        }
+    }
+)
+
+export const updatePost = createAsyncThunk(
+    "post/updatePost",
+    async ({ postId, text }, { rejectWithValue }) => {
+        try {
+            const res = await api.patch(`/post/update/${postId}`, { text });
+            return res.data.data; // updated post
+        } catch (error) {
+            console.log(error, "Error in updating the post")
+            return rejectWithValue(
+                error.response?.data?.message || "Error updating post"
+            );
+        }
+    }
+);
+
+export const createComment = createAsyncThunk("post/comment",
+    async ({ postId, comment }, { rejectWithValue }) => {
+        try {
+            const res = await api.post(`/post/comment/${postId}`, { comment })
+            return res.data.data
+        } catch (error) {
+            console.log(error, "Error in commenting the post")
+            return rejectWithValue(
+                error.response?.data?.message || "Error updating post"
+            );
+        }
+    }
+)
 
 
 const postSlice = createSlice({
@@ -98,6 +139,77 @@ const postSlice = createSlice({
             .addCase(createPost.rejected, (state) => {
                 state.creating = false;
             })
+
+            .addCase(getMyPosts.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+
+            .addCase(getMyPosts.fulfilled, (state, action) => {
+                state.loading = false;
+                state.list = action.payload;
+            })
+
+            .addCase(getMyPosts.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+            })
+
+
+            .addCase(updatePost.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+
+            .addCase(updatePost.fulfilled, (state, action) => {
+                state.loading = false;
+
+                const updatedPost = action.payload;
+
+                const post = state.list.find(
+                    (p) => p._id === updatedPost._id
+                );
+
+                if (post) {
+                    post.text = updatedPost.text
+                }
+            })
+
+
+            .addCase(updatePost.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+
+            //COMMENT
+            .addCase(createComment.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+
+            .addCase(createComment.fulfilled, (state, action) => {
+                state.loading = false;
+
+                const updatedPost = action.payload;
+
+                const index = state.list.findIndex(
+                    (post) => post._id === updatedPost._id
+                );
+
+                if (index !== -1) {
+                    state.list[index] = {
+                        ...state.list[index],
+                        ...updatedPost,
+                        
+                        user: state.list[index].user,
+                    };
+                }
+            })
+
+            .addCase(createComment.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
     }
 })
 

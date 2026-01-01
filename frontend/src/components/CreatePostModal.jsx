@@ -10,19 +10,19 @@ export default function CreatePostModal({ open, onClose }) {
   const [text, setText] = useState("");
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [pic,setPic] = useState(null)
+  const [pic, setPic] = useState(null)
 
   const dispatch = useDispatch();
 
-const handleCreatePost = () => {
-  if (!text || !file) {
-    alert("Caption and image are required");
-    return;
-  }
+  const handleCreatePost = () => {
+    if (!text || !file) {
+      alert("Caption and image are required");
+      return;
+    }
 
-  dispatch(createPost({ text, file }));
-  onClose();
-};
+    dispatch(createPost({ text, file }));
+    onClose();
+  };
 
 
 
@@ -68,14 +68,23 @@ const handleCreatePost = () => {
             <input type="file"
               accept="image/*"
               // onChange={(e) => setFile(e.target.files[0])}
-              onChange={(e)=>{
+              onChange={(e) => {
                 const image = e.target.files[0]
                 setFile(image)
                 setPic(URL.createObjectURL(image))
               }}
               className="mt-3 text-center bg-blue-600 hover:bg-blue-700 px-4 py-1.5 rounded-md text-sm"
             />
-            {pic && <img src={pic} alt="Picture" />}
+            {pic && (
+              <div className="mt-4 flex justify-center">
+                <img
+                  src={pic}
+                  alt="Preview"
+                  className="max-h-60 w-full max-w-md rounded-lg object-contain border border-white/10"
+                />
+              </div>
+            )}
+
           </div>
         </div>
 

@@ -13,6 +13,7 @@ import { logout } from "../features/authSlice";
 const Sidebar = () => {
     const user = useSelector(state => state.auth.user);
     const [showModal, setShowModal] = useState(false);
+    
 
     const navigate = useNavigate()
 
@@ -101,6 +102,7 @@ const Sidebar = () => {
 
             </nav>
             <CreatePostModal open={showModal} onClose={() => setShowModal(false)} />
+            
         </aside>
     );
 };

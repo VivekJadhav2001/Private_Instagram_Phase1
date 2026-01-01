@@ -102,14 +102,14 @@ const authSlice = createSlice({
                     state.error = null;
                 }
             )
-        .addMatcher(
-            (action) => action.type.endsWith("/rejected"),
-            (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            }
-        )
-},
+            .addMatcher(
+                (action) => action.type.endsWith("/rejected"),
+                (state, action) => {
+                    state.loading = false;
+                    state.error = action.payload;
+                }
+            )
+    },
 })
 
 export const { logout } = authSlice.actions;

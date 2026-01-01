@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { timeAgo } from "../../constants";
 
 function Comments({ isDark=true, comments = [] }) {
   const [openMenuIndex, setOpenMenuIndex] = useState(null);
@@ -46,7 +47,7 @@ function Comments({ isDark=true, comments = [] }) {
               </div>
 
               {/* MENU */}
-              <div className="relative">
+              {/* <div className="relative">
                 <button
                   onClick={() =>
                     setOpenMenuIndex(
@@ -76,7 +77,7 @@ function Comments({ isDark=true, comments = [] }) {
                     </button>
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
 
             {/* Actions */}
@@ -85,8 +86,8 @@ function Comments({ isDark=true, comments = [] }) {
                 ${isDark ? "text-gray-400" : "text-gray-500"}
               `}
             >
-              <span className="hover:underline">Like</span>
-              <span className="hover:underline">Reply</span>
+              {/* <span className="hover:underline">Like</span>
+              <span className="hover:underline">Reply</span> */}
             </div>
           </div>
         </div>

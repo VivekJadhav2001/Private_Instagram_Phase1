@@ -14,6 +14,7 @@ const Home = () => {
     state => state.posts
   );
 
+
   // console.log(posts, "POsts in Home Page")
 
 
@@ -27,14 +28,17 @@ const Home = () => {
       <Sidebar />
       <TopProfileBar />
 
-      <main className="md:ml-64 pt-10 flex justify-center">
+      {posts.length> 0 ? (<main className="md:ml-64 pt-10 flex justify-center">
         <div className="w-full max-w-xl">
           {creating && <PostSkeleton />}
           {posts.map(post => (
             <Post key={post._id} post={post} />
           ))}
         </div>
-      </main>
+      </main>) : <main className="md:ml-64 pt-10 flex justify-center">
+        <div className="w-full max-w-xl">
+          <p>No Posts Avalaible</p>
+          </div></main>}
     </div>
   );
 };
