@@ -1,6 +1,9 @@
-import  jwt  from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { User } from "../models/user.model.js";
 import bcrypt from "bcrypt";
+
+const COOKIE_MAX_AGE = 7 * 24 * 60 * 60 * 1000;
+
 
 const signUp = async (req, res) => {
     try {
@@ -61,15 +64,17 @@ const signIn = async (req, res) => {
         }
 
         //generate token
-        const token = jwt.sign({ id: user._id, email: user.email, name:user.name }, process.env.JWT_SECRET, { expiresIn: process.env.EXPIRE_TOKEN })
+        const token = jwt.sign({ id: user._id, email: user.email, name: user.name }, process.env.JWT_SECRET, { expiresIn: process.env.EXPIRE_TOKEN })
 
         const loginUser = await User.findOne({ email }).select("-password -token")
+
+
 
         return res.cookie("private-instagram-token", token, {
             httpOnly: true,
             secure: true,
             sameSite: "none",
-            maxAge: parseInt(process.env.EXPIRE_TOKEN) * 1000, // Convert to milliseconds
+            maxAge: COOKIE_MAX_AGE,
         }).status(200).json({ success: true, message: "Login successful", data: loginUser })
 
     } catch (error) {
@@ -96,7 +101,6 @@ const logout = async (req, res) => {
             httpOnly: true,
             secure: true,
             sameSite: "none",
-            maxAge: parseInt(process.env.EXPIRE_TOKEN) * 1000, // Convert to milliseconds
         });
 
         return res.status(200).json({
