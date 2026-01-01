@@ -68,7 +68,8 @@ const signIn = async (req, res) => {
         return res.cookie("private-instagram-token", token, {
             httpOnly: true,
             secure: true,
-            sameSite: "none"
+            sameSite: "none",
+            maxAge: parseInt(process.env.EXPIRE_TOKEN) * 1000, // Convert to milliseconds
         }).status(200).json({ success: true, message: "Login successful", data: loginUser })
 
     } catch (error) {
@@ -95,6 +96,7 @@ const logout = async (req, res) => {
             httpOnly: true,
             secure: true,
             sameSite: "none",
+            maxAge: parseInt(process.env.EXPIRE_TOKEN) * 1000, // Convert to milliseconds
         });
 
         return res.status(200).json({
