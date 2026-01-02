@@ -10,7 +10,7 @@ const Profile = () => {
     const { user } = useSelector((state) => state.auth)
 
     const { list: posts } = useSelector((state) => state.posts)
-    // console.log(posts, "INPROFILE")
+    console.log(posts, "INPROFILE")
 
     useEffect(() => {
         dispatch(getMyPosts())
