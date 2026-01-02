@@ -60,8 +60,8 @@ const Profile = () => {
                             {/* Stats */}
                             <div className="flex gap-10 text-sm">
                                 <span><strong>{posts.length}</strong> posts</span>
-                                <span><strong>161</strong> followers</span>
-                                <span><strong>1,859</strong> following</span>
+                                <span><strong>{posts.likes.length}</strong> Total Likes</span>
+                                <span><strong>{posts.comments.length}</strong> Total Comments</span>
                             </div>
 
                             {/* Bio */}
