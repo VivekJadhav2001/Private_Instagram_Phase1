@@ -10,7 +10,17 @@ const Profile = () => {
     const { user } = useSelector((state) => state.auth)
 
     const { list: posts } = useSelector((state) => state.posts)
-    console.log(posts, "INPROFILE")
+    // console.log(posts, "INPROFILE")
+
+    const totalLikes = posts.reduce(
+        (acc, post) => acc + (post.likes?.length || 0),
+        0
+    );
+
+    const totalComments = posts.reduce(
+        (acc, post) => acc + (post.comments?.length || 0),
+        0
+    );
 
     useEffect(() => {
         dispatch(getMyPosts())
@@ -60,8 +70,8 @@ const Profile = () => {
                             {/* Stats */}
                             <div className="flex gap-10 text-sm">
                                 <span><strong>{posts.length}</strong> posts</span>
-                                <span><strong>{posts?.likes?.length}</strong> Total Likes</span>
-                                <span><strong>{posts?.comments?.length}</strong> Total Comments</span>
+                                <span><strong>{totalLikes}</strong> Total Likes</span>
+                                <span><strong>{totalComments}</strong> Total Comments</span>
                             </div>
 
                             {/* Bio */}
