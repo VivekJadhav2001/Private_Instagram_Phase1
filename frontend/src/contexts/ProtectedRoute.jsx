@@ -14,7 +14,7 @@ const ProtectedRoute = ({ children }) => {
         
         {/* Instagram-like Logo Text */}
         <h1 className="text-4xl font-semibold font-[cursive] text-black">
-          InstaLearn
+         Welcome to Private Instagram. Hang tight — the backend is warming up.
         </h1>
 
         {/* Spinner */}
