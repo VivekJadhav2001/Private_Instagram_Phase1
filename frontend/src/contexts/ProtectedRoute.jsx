@@ -8,7 +8,24 @@ const ProtectedRoute = ({ children }) => {
 
   //Loading phase
   if (!authChecked) {
-    return <div className="text-white p-10">Loading...</div>;
+    return (
+    <div className="flex h-screen w-full items-center justify-center bg-white">
+      <div className="flex flex-col items-center gap-6">
+        
+        {/* Instagram-like Logo Text */}
+        <h1 className="text-4xl font-semibold font-[cursive] text-black">
+          InstaLearn
+        </h1>
+
+        {/* Spinner */}
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-300 border-t-black"></div>
+
+        {/* Sub text */}
+        <p className="text-sm text-gray-500">Loading...</p>
+      </div>
+    </div>
+  );
+
   }
 
   // If Not logged in
